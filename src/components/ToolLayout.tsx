@@ -23,59 +23,40 @@ export default function ToolLayout({
   return (
     <>
       <Header />
-      <div className="grid-bg" />
-      
-      <main className="pt-28 pb-20 px-4">
+      <main className="pt-20 sm:pt-24 pb-12 sm:pb-20 px-4">
         <div className="max-w-4xl mx-auto">
-          {/* Back Link */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 font-mono text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors mb-8 uppercase tracking-wider"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span>All Tools</span>
-            </Link>
-          </motion.div>
-
-          {/* Tool Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mb-10"
+            className="mb-6 sm:mb-8"
           >
-            <div className="flex items-start gap-5 mb-4">
-              <div
-                className="w-14 h-14 flex items-center justify-center border-2 flex-shrink-0"
-                style={{ 
-                  borderColor: color,
-                  boxShadow: `4px 4px 0px ${color}`,
-                }}
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-4 sm:mb-6 text-sm sm:text-base"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to tools</span>
+            </Link>
+
+            <div className="flex items-start sm:items-center gap-3 sm:gap-4 mb-4">
+              <motion.div
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center flex-shrink-0"
+                style={{ background: `linear-gradient(135deg, ${color}40, ${color}20)` }}
+                whileHover={{ scale: 1.1, rotate: 5 }}
               >
-                <Icon className="w-6 h-6" style={{ color }} />
-              </div>
-              
+                <Icon className="w-6 h-6 sm:w-8 sm:h-8" style={{ color }} />
+              </motion.div>
               <div>
-                <h1 className="font-display font-bold text-3xl lg:text-4xl text-[var(--text-primary)] mb-2">
-                  {title}
-                </h1>
-                <p className="font-mono text-[var(--text-secondary)]">
-                  {description}
-                </p>
+                <h1 className="text-xl sm:text-3xl font-bold text-white">{title}</h1>
+                <p className="text-white/60 text-sm sm:text-base mt-0.5 sm:mt-1">{description}</p>
               </div>
             </div>
           </motion.div>
 
-          {/* Tool Content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ delay: 0.2 }}
           >
             {children}
           </motion.div>

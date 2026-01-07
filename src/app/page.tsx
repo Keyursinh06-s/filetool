@@ -1,131 +1,339 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Merge, Scissors, FileDown, Image, FileImage, RotateCcw, Stamp, Shield, Unlock, PenTool, Layers, ListOrdered, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
+import ToolCard from "@/components/ToolCard";
+import {
+  Merge,
+  Split,
+  FileDown,
+  Image,
+  FileImage,
+  RotateCcw,
+  Lock,
+  Unlock,
+  Stamp,
+  PenTool,
+  ListOrdered,
+  FileSignature,
+  Layers,
+  Shield,
+  Zap,
+  Globe,
+} from "lucide-react";
 
 const tools = [
-  { id: "merge", name: "Merge PDF", desc: "Combine multiple PDFs into one", icon: Merge, href: "/merge", color: "#ff6b4a" },
-  { id: "split", name: "Split PDF", desc: "Extract pages from your PDF", icon: Scissors, href: "/split", color: "#00d4ff" },
-  { id: "compress", name: "Compress", desc: "Reduce file size instantly", icon: FileDown, href: "/compress", color: "#d4ff00" },
-  { id: "to-image", name: "PDF to Image", desc: "Convert pages to JPG/PNG", icon: Image, href: "/pdf-to-image", color: "#ff00d4" },
-  { id: "from-image", name: "Image to PDF", desc: "Create PDF from images", icon: FileImage, href: "/image-to-pdf", color: "#ffa500" },
-  { id: "rotate", name: "Rotate", desc: "Fix page orientation", icon: RotateCcw, href: "/rotate", color: "#00ffa5" },
-  { id: "watermark", name: "Watermark", desc: "Add text watermarks", icon: Stamp, href: "/watermark", color: "#ff4a6b" },
-  { id: "protect", name: "Protect", desc: "Password protect PDF", icon: Shield, href: "/protect", color: "#a56bff" },
-  { id: "unlock", name: "Unlock", desc: "Remove PDF password", icon: Unlock, href: "/unlock", color: "#6bff4a" },
-  { id: "sign", name: "Sign", desc: "Add your signature", icon: PenTool, href: "/sign", color: "#ff6b4a" },
-  { id: "organize", name: "Organize", desc: "Reorder and delete pages", icon: Layers, href: "/organize", color: "#00d4ff" },
-  { id: "page-numbers", name: "Page Numbers", desc: "Add page numbering", icon: ListOrdered, href: "/page-numbers", color: "#d4ff00" },
+  {
+    title: "Merge PDF",
+    description: "Combine multiple PDF files into one document",
+    icon: Merge,
+    href: "/merge",
+    color: "#667eea",
+  },
+  {
+    title: "Split PDF",
+    description: "Extract pages or split into multiple files",
+    icon: Split,
+    href: "/split",
+    color: "#f093fb",
+  },
+  {
+    title: "Compress PDF",
+    description: "Reduce file size for easy sharing",
+    icon: FileDown,
+    href: "/compress",
+    color: "#4ade80",
+  },
+  {
+    title: "PDF to Image",
+    description: "Convert PDF pages to JPG or PNG",
+    icon: Image,
+    href: "/pdf-to-image",
+    color: "#fb923c",
+  },
+  {
+    title: "Image to PDF",
+    description: "Convert images to PDF format",
+    icon: FileImage,
+    href: "/image-to-pdf",
+    color: "#38bdf8",
+  },
+  {
+    title: "Rotate PDF",
+    description: "Rotate pages to correct orientation",
+    icon: RotateCcw,
+    href: "/rotate",
+    color: "#a78bfa",
+  },
+  {
+    title: "Page Numbers",
+    description: "Add page numbers to your PDF",
+    icon: ListOrdered,
+    href: "/page-numbers",
+    color: "#06b6d4",
+  },
+  {
+    title: "Watermark",
+    description: "Add text or image watermarks",
+    icon: Stamp,
+    href: "/watermark",
+    color: "#eab308",
+  },
+  {
+    title: "Protect PDF",
+    description: "Add password protection",
+    icon: Lock,
+    href: "/protect",
+    color: "#f43f5e",
+  },
+  {
+    title: "Unlock PDF",
+    description: "Remove password protection",
+    icon: Unlock,
+    href: "/unlock",
+    color: "#14b8a6",
+  },
+  {
+    title: "Sign PDF",
+    description: "Add your signature to documents",
+    icon: FileSignature,
+    href: "/sign",
+    color: "#8b5cf6",
+  },
+  {
+    title: "Organize PDF",
+    description: "Delete, reorder & manage pages",
+    icon: Layers,
+    href: "/organize",
+    color: "#ec4899",
+  },
+];
+
+const stats = [
+  { value: "10M+", label: "PDFs Processed" },
+  { value: "100%", label: "Free Forever" },
+  { value: "256-bit", label: "Encryption" },
+  { value: "0", label: "Files Stored" },
 ];
 
 export default function Home() {
   return (
     <>
       <Header />
-      <div className="grid-bg" />
-      <main className="min-h-screen pt-32 pb-20">
-        <section className="px-4 mb-20 lg:mb-32">
-          <div className="max-w-7xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-px w-12 bg-[var(--accent)]" />
-                <span className="font-mono text-sm text-[var(--accent)] uppercase tracking-widest">Free and Open Source</span>
-              </div>
-              <h1 className="heading-xl mb-6">
-                <span className="block text-[var(--text-primary)]">Every PDF</span>
-                <span className="block text-[var(--text-primary)]">Tool You</span>
-                <span className="block text-[var(--accent)]">Need.</span>
-              </h1>
-              <p className="font-mono text-[var(--text-secondary)] text-lg max-w-xl mb-10 leading-relaxed">
-                Merge, split, compress, convert, rotate, watermark and more.
-                <span className="text-[var(--text-primary)]"> 100% free. 100% private. </span>
-                Files never leave your browser.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="#tools" className="btn-brutal">Explore Tools <ArrowRight className="w-4 h-4" /></Link>
-                <a href="https://github.com/Keyursinh06-s/filetool" target="_blank" rel="noopener noreferrer" className="btn-ghost">View on GitHub</a>
-              </div>
+      <main className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          {/* Hero Section */}
+          <motion.div
+            className="text-center mb-12 sm:mb-20"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass mb-6 sm:mb-8"
+            >
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-xs sm:text-sm text-white/70">100% Free • No Registration • No Limits</span>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="mt-16 lg:mt-24 grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {[{ value: "12+", label: "PDF Tools" }, { value: "0", label: "Data Uploaded" }, { value: "∞", label: "Free Uses" }, { value: "<1s", label: "Processing" }].map((stat, i) => (
-                <div key={i} className="p-6 border-2 border-[var(--border)] bg-[var(--bg-card)]">
-                  <div className="font-display font-bold text-3xl lg:text-4xl text-[var(--accent)] mb-1">{stat.value}</div>
-                  <div className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-wider">{stat.label}</div>
-                </div>
+
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 px-2">
+              <span className="text-white">Every tool to work</span>
+              <br />
+              <span className="gradient-text">with PDFs in one place</span>
+            </h1>
+
+            <motion.p
+              className="text-base sm:text-xl text-white/60 max-w-2xl mx-auto mb-8 sm:mb-12 px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              Merge, split, compress, convert, sign, and edit PDFs with ease.
+              All processing happens in your browser — your files never leave your device.
+            </motion.p>
+
+            {/* Stats */}
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-2xl mx-auto mb-8 sm:mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  className="glass rounded-xl p-3 sm:p-4"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6 + i * 0.1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <p className="text-xl sm:text-2xl font-bold gradient-text">{stat.value}</p>
+                  <p className="text-white/50 text-xs sm:text-sm">{stat.label}</p>
+                </motion.div>
               ))}
             </motion.div>
-          </div>
-        </section>
-        <section className="mb-20 lg:mb-32 overflow-hidden border-y-2 border-[var(--border)] bg-[var(--bg-card)]">
-          <div className="marquee py-4">
-            <div className="marquee-content">
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex items-center">
-                  {tools.map((tool) => (
-                    <span key={tool.id + i} className="font-display font-bold text-2xl lg:text-3xl uppercase px-8 text-[var(--text-muted)] whitespace-nowrap">
-                      {tool.name}<span className="text-[var(--accent)] mx-4">◆</span>
-                    </span>
-                  ))}
-                </div>
+
+            <motion.div
+              className="flex flex-wrap justify-center gap-2 sm:gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              {["Fast", "Secure", "Private", "No Upload"].map((badge, i) => (
+                <motion.span
+                  key={badge}
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass text-white/70 text-xs sm:text-sm"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.7 + i * 0.1 }}
+                  whileHover={{ scale: 1.05, background: "rgba(255,255,255,0.1)" }}
+                >
+                  {badge}
+                </motion.span>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Tools Grid */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 text-center">
+              All PDF Tools
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              {tools.map((tool, index) => (
+                <ToolCard
+                  key={tool.title}
+                  {...tool}
+                  delay={0.9 + index * 0.03}
+                />
               ))}
             </div>
-          </div>
-        </section>
-        <section id="tools" className="px-4 mb-20 lg:mb-32">
-          <div className="max-w-7xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-12">
-              <h2 className="heading-lg mb-4">All Tools<span className="text-[var(--accent)]">.</span></h2>
-              <p className="font-mono text-[var(--text-secondary)] max-w-lg">Select a tool below. Everything runs locally in your browser.</p>
-            </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {tools.map((tool, i) => (
-                <motion.div key={tool.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.05 }}>
-                  <Link href={tool.href}>
-                    <div className="card-brutal p-6 h-full group cursor-pointer">
-                      <div className="w-12 h-12 flex items-center justify-center mb-4 border-2 transition-all duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" style={{ borderColor: tool.color, boxShadow: `3px 3px 0px ${tool.color}` }}>
-                        <tool.icon className="w-5 h-5" style={{ color: tool.color }} />
-                      </div>
-                      <h3 className="font-display font-semibold text-lg mb-2 group-hover:text-[var(--accent)] transition-colors">{tool.name}</h3>
-                      <p className="font-mono text-sm text-[var(--text-muted)] mb-4">{tool.desc}</p>
-                      <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors">
-                        <span>Use Tool</span><ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
+          </motion.div>
+
+          {/* Features Section */}
+          <motion.div
+            className="mt-16 sm:mt-32 text-center"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4">
+              Why choose our PDF tools?
+            </h2>
+            <p className="text-white/60 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              Built with modern technology for the best experience
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+              {[
+                {
+                  icon: Shield,
+                  title: "100% Private",
+                  desc: "Files are processed locally in your browser. Nothing is uploaded to any server.",
+                  color: "#4ade80",
+                },
+                {
+                  icon: Zap,
+                  title: "Lightning Fast",
+                  desc: "Modern WebAssembly technology for instant processing without waiting.",
+                  color: "#facc15",
+                },
+                {
+                  icon: Globe,
+                  title: "Works Offline",
+                  desc: "Once loaded, works without internet. Perfect for sensitive documents.",
+                  color: "#38bdf8",
+                },
+              ].map((feature, i) => (
+                <motion.div
+                  key={feature.title}
+                  className="glass rounded-2xl p-6 sm:p-8 text-left"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <feature.icon
+                    className="w-8 h-8 sm:w-10 sm:h-10 mb-4"
+                    style={{ color: feature.color }}
+                  />
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-white/60 text-sm sm:text-base">{feature.desc}</p>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
-        <section className="px-4 mb-20 lg:mb-32">
-          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
-            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-8 lg:p-12 border-2 border-[var(--accent)] bg-[var(--bg-card)]">
-              <div className="font-mono text-sm text-[var(--accent)] uppercase tracking-widest mb-4">Privacy First</div>
-              <h3 className="heading-md mb-4">Your Files Stay On Your Device</h3>
-              <p className="font-mono text-[var(--text-secondary)] leading-relaxed">All processing happens locally in your browser. No uploads, no servers, no tracking. Your documents remain 100% private.</p>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-8 lg:p-12 border-2 border-[var(--border)] bg-[var(--bg-card)]">
-              <div className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-widest mb-4">Open Source</div>
-              <h3 className="heading-md mb-4">Built in Public Free Forever</h3>
-              <p className="font-mono text-[var(--text-secondary)] leading-relaxed">No subscriptions, no limits, no ads. The code is open source on GitHub. Use it, fork it, improve it.</p>
-            </motion.div>
-          </div>
-        </section>
-        <footer className="px-4 border-t-2 border-[var(--border)] pt-12">
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
-            <div>
-              <div className="font-display font-bold text-2xl mb-2">FILE<span className="text-[var(--accent)]">TOOL</span></div>
-              <p className="font-mono text-sm text-[var(--text-muted)]">Free PDF tools that respect your privacy.</p>
+          </motion.div>
+
+          {/* Use Cases */}
+          <motion.div
+            className="mt-16 sm:mt-32"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 sm:mb-4 text-center">
+              Perfect for everyone
+            </h2>
+            <p className="text-white/60 mb-8 sm:mb-12 max-w-2xl mx-auto text-center text-sm sm:text-base px-4">
+              Whether you&apos;re a student, professional, or business owner
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {[
+                { emoji: "🎓", title: "Students", desc: "Merge assignments, compress for email" },
+                { emoji: "💼", title: "Professionals", desc: "Sign contracts, protect documents" },
+                { emoji: "🏢", title: "Businesses", desc: "Watermark, organize & secure files" },
+                { emoji: "⚖️", title: "Legal", desc: "Redact info, add page numbers" },
+              ].map((useCase, i) => (
+                <motion.div
+                  key={useCase.title}
+                  className="glass rounded-xl p-5 sm:p-6 text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ scale: 1.03 }}
+                >
+                  <span className="text-3xl sm:text-4xl mb-3 block">{useCase.emoji}</span>
+                  <h3 className="text-white font-semibold mb-1">{useCase.title}</h3>
+                  <p className="text-white/50 text-sm">{useCase.desc}</p>
+                </motion.div>
+              ))}
             </div>
-            <div className="flex items-center gap-6 font-mono text-sm">
-              <a href="https://github.com/Keyursinh06-s/filetool" target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors">GitHub</a>
-              <span className="text-[var(--text-muted)]">© 2025</span>
-            </div>
-          </div>
-        </footer>
+          </motion.div>
+        </div>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 py-6 sm:py-8 px-4">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-white/50 text-xs sm:text-sm text-center sm:text-left">
+            © 2024 LovePDF Clone. All processing happens in your browser.
+          </p>
+          <div className="flex gap-4 sm:gap-6">
+            {["Privacy", "Terms", "Contact"].map((link) => (
+              <a
+                key={link}
+                href="#"
+                className="text-white/50 hover:text-white text-xs sm:text-sm transition-colors"
+              >
+                {link}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
